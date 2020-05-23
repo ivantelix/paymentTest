@@ -13,6 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
+
+//route clients
+Route::get('clients/', 'UsersController@index');
+
+//route payments
+Route::get('payment/', 'UsersController@getPayment');
+Route::get('payments/', 'PaymentsController@index');
+Route::post('payment/create', 'PaymentsController@create');
+Route::delete('payment/', 'PaymentsController@delete');
