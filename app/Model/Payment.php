@@ -14,11 +14,9 @@ class Payment extends Model
 		'user_id',
 		'clp_usd'
 	];
-	
 
 	public function client()
 	{
 		return $this->belongsTo('App\User');
 	}
-    //
 }
