@@ -18,6 +18,7 @@ asignarle el valor de database.
 
 Luego ejecutar:
 - php artisan key:generate
+- php artisan queue:table
 - php artisan migrate:refresh --seed
 - composer dumpautoload
 
