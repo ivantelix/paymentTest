@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Events\PaymentCreateEvent;
 use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
@@ -14,6 +15,10 @@ class Payment extends Model
 		'user_id',
 		'clp_usd'
 	];
+
+    protected $dispatchesEvents = [
+        'saved' => PaymentCreateEvent::class,
+    ];
 
 	public function client()
 	{

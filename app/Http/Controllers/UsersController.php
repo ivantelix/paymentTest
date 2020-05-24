@@ -15,24 +15,30 @@ class UsersController extends Controller
 
     public function getPayment(Request $request)
     {
-        $client = $request->get('client');
+        if ($request->has('client')) {
+            $client = $request->get('client');
 
-        $payments = User::with('payments')->where('id', $client)->get();
-        return response()->json($payments, 200);
+            $context = User::with('payments')->where('id', $client)->get();
+        }
+        else {
+            $context = "You must specify the user_id parameter";
+        }
+
+        return response()->json($context, 200);
     }
 
     public function store(Request $request)
     {
-        //
+        //not necesary
     }
 
     public function update(Request $request, $id)
     {
-        //
+        //not necesary
     }
 
     public function destroy($id)
     {
-        //
+        //not necesary
     }
 }

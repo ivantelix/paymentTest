@@ -2,26 +2,11 @@
 
 use Illuminate\Http\Request;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-/*Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});*/
-
 //route clients
-Route::get('clients/', 'UsersController@index');
+Route::get('clients/', 'UsersController@index');//get all users
 
 //route payments
-Route::get('payment/', 'UsersController@getPayment');
-Route::get('payments/', 'PaymentsController@index');
-Route::post('payment/create', 'PaymentsController@create');
-Route::delete('payment/', 'PaymentsController@delete');
+Route::get('payment/', 'UsersController@getPayment');//get all payments of a user specified
+Route::get('payments/', 'PaymentsController@index');//get all payments
+Route::post('payment/', 'PaymentsController@create');//create a new payment
+Route::delete('payment/', 'PaymentsController@delete');//destroy a payment with uuid provided

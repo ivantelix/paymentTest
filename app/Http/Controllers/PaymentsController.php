@@ -8,18 +8,10 @@ use Illuminate\Support\Facades\Validator;
 
 use App\Model\Payment;
 use App\Jobs\CLPConsult;
-
-use App\Repositories\CLPConsultGuzzle;
+use App\Events\PaymentCreateEvent;
 
 class PaymentsController extends Controller
 {
-    protected $clp;
-
-    public function __construct(CLPConsultGuzzle $clp)
-    {
-        $this->clp = $clp;
-    }
-
     public function index()
 	{
 		$payments = Payment::with(['client'])->get();
@@ -47,15 +39,28 @@ class PaymentsController extends Controller
         	"user_id" => $request->user_id
         ];
 
-        var_dump($this->clp->get());
-
-        /*$payment = Payment::create($payment);
+        $payment = Payment::create($payment);
 
         if(!$payment) {
         	return response()->json("An error has occurred.", 400);
         }
 
-        dispatch(new CLPConsult($payment));
-        return response()->json($payment, 201);*/
+        //dispatch job for consult api
+        CLPConsult::dispatch($payment);
+
+        return response()->json($payment, 201);
 	}
+
+	public function delete(Request $request)
+    {
+        if($request->has('uuid')) {
+            Payment::where('uuid','=', $request->get('uuid'))->delete();
+            $msg = "Payment has been successfully removed";
+        }
+        else {
+            $msg = "You must specify the uuid parameter";
+        }
+
+        return response()->json($msg);
+    }
 }

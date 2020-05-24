@@ -14,6 +14,7 @@ class CreatePaymentsTable extends Migration
     public function up()
     {
         Schema::create('payments', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->uuid('uuid');
             $table->date('payment_date')->format('Y-m-d')->nullable();
             $table->date('expires_at')->format('Y-m-d');
