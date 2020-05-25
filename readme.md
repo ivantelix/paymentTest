@@ -12,15 +12,14 @@
 
 ## Comandos:
 - composer install
+- composer update
 
 NOTA: Configurar en el archivo .env las credenciales de la Base de Datos, Mailtrap y la variable QUEUE_CONNECTION 
 asignarle el valor de database. 
 
 Luego ejecutar:
 - php artisan key:generate
-- php artisan queue:table
 - php artisan migrate:refresh --seed
-- composer dumpautoload
 
 Disponer de 2 terminales una para el servidor y otra para el control de las colas:
 
